@@ -52,7 +52,7 @@ public class AccountSeeder implements Ordered, CommandLineRunner {
                 user.setDepartment("Đại học Bình Dương");
                 user.setFirstName("Admin");
                 user.setLastName("");
-                user.setPhone("");
+                user.setPhone("0123456789");
                 account.setUser(
                         userRepository.save(user)
                 );

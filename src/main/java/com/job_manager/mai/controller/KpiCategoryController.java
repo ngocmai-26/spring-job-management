@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/kpi-categories")
 @CrossOrigin
-@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
+//@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
 @RequiredArgsConstructor
 public class KpiCategoryController implements IBaseController<KpiCategoryRequest, CreateKpiCategoryRequest, UpdateKpiCategoryRequest, UpdateKpiCategoryRequest, String> {
     private final KpiCategoryService kpiCategoryService;

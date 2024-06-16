@@ -10,10 +10,7 @@ import com.job_manager.mai.model.Account;
 import com.job_manager.mai.model.User;
 import com.job_manager.mai.repository.AccountRepository;
 import com.job_manager.mai.repository.UserRepository;
-import com.job_manager.mai.request.user.CreateUserRequest;
-import com.job_manager.mai.request.user.DeleteUserRequest;
-import com.job_manager.mai.request.user.UpdateUserRequest;
-import com.job_manager.mai.request.user.UserRequest;
+import com.job_manager.mai.request.user.*;
 import com.job_manager.mai.service.base.BaseService;
 import com.job_manager.mai.util.ApiResponseHelper;
 import com.job_manager.mai.util.SecurityHelper;
@@ -100,5 +97,37 @@ public class UserServiceIpm extends BaseService implements UserService {
     @Override
     public ResponseEntity<?> SearchAndSortByProperties(Pageable pageable, String searchProperties, String sortProperties) throws Exception {
         return null;
+    }
+
+    @Override
+    public ResponseEntity<?> addStaff(StaffChangeRequest request) throws Exception {
+        User manager = userRepository.findById(request.getManagerId()).orElse(null);
+        if (manager == null) {
+            throw new UserNotFoundException(Messages.USER_NOT_FOUND);
+        }
+        for (String staffId : request.getStaffIds()) {
+            User staff = userRepository.findById(staffId).orElseThrow(() -> new UserNotFoundException(Messages.USER_NOT_FOUND));
+            if (!manager.getStaffs().contains(staff)) {
+                manager.addStaff(staff);
+            }
+        }
+        userRepository.save(manager);
+        return ApiResponseHelper.success(manager.getStaffs());
+    }
+
+    @Override
+    public ResponseEntity<?> removeStaff(StaffChangeRequest request) throws Exception {
+        User manager = userRepository.findById(request.getManagerId()).orElse(null);
+        if (manager == null) {
+            throw new UserNotFoundException(Messages.USER_NOT_FOUND);
+        }
+        for (String staffId : request.getStaffIds()) {
+            User staff = userRepository.findById(staffId).orElseThrow(() -> new UserNotFoundException(Messages.USER_NOT_FOUND));
+            if (manager.getStaffs().contains(staff)) {
+                manager.removeStaff(staff);
+            }
+        }
+        userRepository.save(manager);
+        return ApiResponseHelper.success(manager.getStaffs());
     }
 }

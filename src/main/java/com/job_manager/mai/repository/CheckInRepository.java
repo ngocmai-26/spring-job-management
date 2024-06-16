@@ -24,4 +24,6 @@ public interface CheckInRepository extends JpaRepository<TimeKeeping, Long> {
     List<TimeKeeping> findAllByUserChecked(Pageable pageable, User user);
 
     List<TimeKeeping> findAllByUserCheckedIn(Pageable pageable, Set<User> users);
+
+    int countAllByUserCheckedAndCheckInTimeBetween(User user, LocalDateTime timeStart, LocalDateTime timeEnd);
 }

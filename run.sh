@@ -23,7 +23,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 #download mysql
 sudo docker image pull mysql
 
-sudo docker run --name fira-db -e MYSQL_ROOT_PASSWORD=13122002 -e MYSQL_DATABASE=job_management -p 3309:3306 mysql
+sudo docker run --name fira-db -e MYSQL_ROOT_PASSWORD=13122002 -e MYSQL_DATABASE=job_management -p 3306:3306 mysql
 
 
 

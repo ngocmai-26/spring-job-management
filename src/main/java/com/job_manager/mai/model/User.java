@@ -47,7 +47,6 @@ public class User {
     }
 
     @OneToMany
-    @JsonIgnore
     @JoinTable(name = "user_staffs", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "staff_id"))
     private Set<User> staffs = new HashSet<>();
 
@@ -70,4 +69,11 @@ public class User {
     @JoinTable(name = "users_plans", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "plan_id"))
     private Set<Plan> userPlans = new HashSet<>();
 
+    public void addStaff(User staff) {
+        this.staffs.add(staff);
+    }
+
+    public void removeStaff(User staff) {
+        this.staffs.remove(staff);
+    }
 }

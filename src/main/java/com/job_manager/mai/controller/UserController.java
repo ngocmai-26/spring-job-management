@@ -4,10 +4,7 @@ import com.job_manager.mai.contrains.Permission;
 import com.job_manager.mai.controller.base.BaseController;
 import com.job_manager.mai.controller.inteface.IBaseController;
 import com.job_manager.mai.repository.AccountRepository;
-import com.job_manager.mai.request.user.CreateUserRequest;
-import com.job_manager.mai.request.user.DeleteUserRequest;
-import com.job_manager.mai.request.user.UpdateUserRequest;
-import com.job_manager.mai.request.user.UserRequest;
+import com.job_manager.mai.request.user.*;
 import com.job_manager.mai.service.user.UserService;
 import com.job_manager.mai.service.user.UserServiceIpm;
 import com.job_manager.mai.util.ApiResponseHelper;
@@ -16,6 +13,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -110,4 +108,25 @@ public class UserController implements IBaseController<UserRequest, CreateUserRe
     public ResponseEntity<?> sortByName(String name) {
         return null;
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
+    @PostMapping("/add-staff")
+    public ResponseEntity<?> addStaff(@RequestBody StaffChangeRequest request) {
+        try {
+            return userService.addStaff(request);
+        } catch (Exception e) {
+            return ApiResponseHelper.fallback(e);
+        }
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')")
+    @PostMapping("/remove-staff")
+    public ResponseEntity<?> removeStaff(@RequestBody StaffChangeRequest request) {
+        try {
+            return userService.removeStaff(request);
+        } catch (Exception e) {
+            return ApiResponseHelper.fallback(e);
+        }
+    }
+
 }

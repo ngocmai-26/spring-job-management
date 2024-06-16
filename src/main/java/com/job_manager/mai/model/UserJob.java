@@ -28,10 +28,8 @@ public class UserJob {
 
     @UpdateTimestamp
     private Date updatedAt;
-
     @ManyToOne
     private User user;
-
     private String verifyLink;
     private String instructionLink;
     private String denyReason;

@@ -60,8 +60,8 @@ public class KpiServiceImpl extends BaseService implements KpiService {
         Kpi kpi = kpiRepository.findById(s).orElseThrow(() -> new Exception("Kpi not found by id : " + s));
         User user = SecurityHelper.getUserFromLogged(accountRepository);
         if (user == null) return ApiResponseHelper.unAuthorized();
-        if (!Objects.equals(user.getId(), kpi.getUser().getId()))
-            return ApiResponseHelper.fallback(new Exception("Kpi not your mine cannot edit"));
+//        if (!Objects.equals(user.getId(), kpi.getUser().getId()))
+//            return ApiResponseHelper.fallback(new Exception("Kpi not your mine cannot edit"));
         BeanUtils.copyProperties(request, kpi, getNullPropertyNames(request));
         if (request.getKpiTypeId() != null) {
             KpiCategory kpiCategory = kpiCategoryRepository.findById(request.getKpiTypeId()).orElseThrow(() -> new Exception("Kpi type not found by id : " + request.getKpiTypeId()));

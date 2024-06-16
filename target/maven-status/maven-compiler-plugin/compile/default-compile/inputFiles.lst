@@ -5,6 +5,7 @@ C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\user\CreateUserRequest.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\service\contact\ContactService.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\role\RoleRequest.java
+C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\repository\UserJobRepository.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\service\util\MailService.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\seeder\RoleSeeder.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\util\ApiResponseHelper.java
@@ -41,6 +42,7 @@ C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\repository\PlantRepository.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\mailer\SendMailWorker.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\plan\DeletePlanRequest.java
+C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\response\job\IJobMapper.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\schedule\PlanScheduleCreator.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\repository\RoomRepository.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\response\role\IRoleResponser.java
@@ -65,9 +67,11 @@ C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\messages\UpdateMessageRequest.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\model\KpiDetail.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\repository\KpiRepository.java
+C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\job\VerifyProgressJob.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\service\util\ThreadPoolService.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\config\SwaggerConfig.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\user\UserRequest.java
+C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\model\UserJob.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\controller\RoleController.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\contact\AddContactRequest.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\seeder\PermissionSeeder.java
@@ -86,6 +90,7 @@ C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\account\ChangePasswordRequest.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\controller\RoomController.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\model\Message.java
+C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\job\EvaluateUserJobRequest.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\provider\JwtProvider.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\contrains\WorkDay.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\repository\PlanDetailRepository.java
@@ -155,6 +160,7 @@ C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\contact\ResponseContactRequest.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\service\contact\ContactServiceIpm.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\contrains\PlanStatus.java
+C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\model\PlanHandle.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\contrains\Messages.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\member\MemberRequest.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\contrains\ScheduleType.java
@@ -192,12 +198,14 @@ C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\member\UpdateMemberRequest.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\provider\UCodeProvider.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\controller\inteface\ICrudController.java
+C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\job\UpdateUserJobDetailRequest.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\contrains\User.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\repository\MediaRepository.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\schedule\PlanChecker.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\service\kpi\KpiHistoryServiceImpl.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\model\Kpi.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\model\PlanTask.java
+C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\response\job\JobResponse.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\response\role\RoleResponse.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\request\member\DeleteMemberRequest.java
 C:\Users\ADMIN\Downloads\spring-job-management\src\main\java\com\job_manager\mai\service\notification\NotificationServiceIpm.java

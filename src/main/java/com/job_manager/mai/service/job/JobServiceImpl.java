@@ -126,20 +126,13 @@ public class JobServiceImpl extends BaseService implements JobService {
         }
         if (request.getJobEvaluate() != null) {
             if (!Objects.equals(currentUser.getRole().getRoleName(), Roles.ROLE_ADMIN.toString())) {
-                if (Objects.equals(currentUser.getRole().getRoleName(), Roles.ROLE_MANAGER.toString())) {
-                    if (!job.getManager().getId().equals(currentUser.getUser().getId())) {
-                        return ApiResponseHelper.accessDenied();
-                    }
-                }
-                return ApiResponseHelper.accessDenied();
-            }
 
+            }
             // push notification
             job.getUserJobs().forEach((j) -> {
                 if (j.getUser().getId().equals(request.getUserId())) {
                     j.setJobEvaluate(request.getJobEvaluate());
                     userJobRepository.save(j);
-                    jobRepository.save(job);
                     try {
                         CreateNotificationRequest createNotificationRequest = new CreateNotificationRequest();
                         createNotificationRequest.setDataId(jobId);
@@ -153,6 +146,7 @@ public class JobServiceImpl extends BaseService implements JobService {
                     }
                 }
             });
+            jobRepository.save(job);
         }
         return ApiResponseHelper.success();
     }
@@ -160,29 +154,26 @@ public class JobServiceImpl extends BaseService implements JobService {
     @Override
     public ResponseEntity<?> updateUserJob(String jobId, UpdateUserJobDetailRequest request) throws Exception {
         Job job = jobRepository.findById(jobId).orElseThrow(() -> new UsernameNotFoundException("Job not found by id : " + jobId));
-        List<UserJob> userJobs = job.getUserJobs();
-        for (UserJob userJob : userJobs) {
-            if (userJob != null) {
-                if (userJob.getUser().getId().equals(request.getUserId())) {
-                    int oldProgress = userJob.getProgress();
-                    BeanUtils.copyProperties(request, userJob);
-                    userJob.setProgress(oldProgress);
-                    userJob.setCachedProgress(request.getProgress());
-                    if (request.getStatus() == JobStatus.DONE) {
-                        // push notification
-                        userJob.setStatus(JobStatus.DONE);
-                        userJob.getUser().setJobPoint(userJob.getUser().getJobPoint() + job.getPointPerJob());
-                        // luu lich su cong diem
-                        KpiHistory kpiHistory = new KpiHistory();
-                        kpiHistory.setUser(userJob.getUser());
-                        kpiHistoryService.createNewFromOtherService("Cộng " + job.getPointPerJob() + " điểm từ job : " + job.getId(), userJob.getUser());
-                        pushNotificationForAStaff(jobId, userJob.getUser(), job.getManager(), "Bạn vừa hoàn thành một công việc");
-                    }
-                    userJobRepository.save(userJob);
+        for (UserJob userJob : job.getUserJobs()) {
+            if (userJob.getUser().getId().equals(request.getUserId())) {
+                int oldProgress = userJob.getProgress();
+                BeanUtils.copyProperties(request, userJob);
+                userJob.setProgress(oldProgress);
+                userJob.setCachedProgress(request.getProgress());
+                if (request.getStatus() == JobStatus.DONE) {
+                    // push notification
+                    userJob.setStatus(JobStatus.DONE);
+                    userJob.getUser().setJobPoint(userJob.getUser().getJobPoint() + job.getPointPerJob());
+                    // luu lich su cong diem
+                    KpiHistory kpiHistory = new KpiHistory();
+                    kpiHistory.setUser(userJob.getUser());
+                    kpiHistoryService.createNewFromOtherService("Cộng " + job.getPointPerJob() + " điểm từ job : " + job.getTitle(), userJob.getUser());
+                    pushNotificationForAStaff(jobId, userJob.getUser(), job.getManager(), "Bạn vừa hoàn thành một công việc");
                 }
+                userJobRepository.save(userJob);
             }
+            jobRepository.save(job);
         }
-        jobRepository.save(job);
         return ApiResponseHelper.success();
     }
 

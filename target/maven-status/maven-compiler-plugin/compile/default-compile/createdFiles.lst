@@ -14,6 +14,7 @@ com\job_manager\mai\request\user\DeleteUserRequest.class
 com\job_manager\mai\controller\inteface\IBaseController.class
 com\job_manager\mai\response\permission\IPermissionResponser.class
 com\job_manager\mai\filter\JwtAuthFilter.class
+com\job_manager\mai\model\UserJob.class
 com\job_manager\mai\request\messages\CreateMessageRequest.class
 com\job_manager\mai\seeder\ScheduleSeeder.class
 com\job_manager\mai\mailer\SendMailWorker.class
@@ -27,6 +28,7 @@ com\job_manager\mai\controller\CheckInController.class
 com\job_manager\mai\request\job\UpdateJobRequest.class
 com\job_manager\mai\request\member\CreateMemberRequest.class
 com\job_manager\mai\service\permission\PermissionService.class
+com\job_manager\mai\model\PlanHandle.class
 com\job_manager\mai\controller\inteface\ISortController.class
 com\job_manager\mai\controller\KpiHistoryController.class
 com\job_manager\mai\repository\MessageRepository.class
@@ -41,6 +43,7 @@ com\job_manager\mai\seeder\RoleSeeder.class
 com\job_manager\mai\repository\AccountRepository.class
 com\job_manager\mai\repository\ContactRepository.class
 com\job_manager\mai\model\Plan.class
+com\job_manager\mai\request\job\EvaluateUserJobRequest.class
 com\job_manager\mai\request\messages\MessageRequest.class
 com\job_manager\mai\request\job\DeleteJobRequest.class
 com\job_manager\mai\repository\NotificationRepository.class
@@ -64,6 +67,7 @@ com\job_manager\mai\controller\AccountController.class
 com\job_manager\mai\mailer\JavaMail.class
 com\job_manager\mai\exception\PhoneExit.class
 com\job_manager\mai\contrains\JobEvaluate.class
+com\job_manager\mai\response\job\IJobMapper.class
 com\job_manager\mai\service\kpi\KpiServiceImpl.class
 com\job_manager\mai\controller\PermissionController.class
 com\job_manager\mai\provider\UCodeProvider.class
@@ -127,6 +131,7 @@ com\job_manager\mai\repository\MediaRepository.class
 com\job_manager\mai\schedule\PlanChecker.class
 com\job_manager\mai\request\user\CreateUserRequest.class
 com\job_manager\mai\config\ScheduleConfig.class
+com\job_manager\mai\request\job\UpdateUserJobDetailRequest.class
 com\job_manager\mai\service\message\MessageService.class
 com\job_manager\mai\contrains\RoleInRoom.class
 com\job_manager\mai\service\inteface\IBaseService.class
@@ -176,6 +181,7 @@ com\job_manager\mai\exception\AccountNotActive.class
 com\job_manager\mai\config\SwaggerConfig.class
 com\job_manager\mai\request\room\RoomRequest.class
 com\job_manager\mai\repository\KpiCategoryRepository.class
+com\job_manager\mai\response\job\JobResponse.class
 com\job_manager\mai\request\job\GiveJobForUserRequest.class
 com\job_manager\mai\controller\KpiController.class
 com\job_manager\mai\util\UrlHandlerChecker.class
@@ -192,6 +198,7 @@ com\job_manager\mai\request\job\CreateJobRequest.class
 com\job_manager\mai\request\kpi_category\CreateKpiCategoryRequest.class
 com\job_manager\mai\repository\CheckInRepository.class
 com\job_manager\mai\contrains\ContactEvent.class
+com\job_manager\mai\request\job\VerifyProgressJob.class
 com\job_manager\mai\request\member\DeleteMemberRequest.class
 com\job_manager\mai\contrains\MessageStatus.class
 com\job_manager\mai\controller\ContactController.class
@@ -202,6 +209,7 @@ com\job_manager\mai\request\permission\DeletePermRequest.class
 com\job_manager\mai\contrains\ContactStatus.class
 com\job_manager\mai\ServletInitializer.class
 com\job_manager\mai\contrains\Roles.class
+com\job_manager\mai\repository\UserJobRepository.class
 com\job_manager\mai\event\NewContactRequestEvent.class
 com\job_manager\mai\repository\JobRepository.class
 com\job_manager\mai\request\account\ChangePasswordRequest.class

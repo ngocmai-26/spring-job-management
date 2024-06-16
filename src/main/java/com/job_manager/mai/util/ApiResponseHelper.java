@@ -13,7 +13,6 @@ import java.util.Map;
 
 public class ApiResponseHelper {
 
-
     public static ResponseEntity<?> authTokenExpired() {
         List<String> msgs = new ArrayList<>();
         msgs.add(Messages.JTW_EXPIRED);

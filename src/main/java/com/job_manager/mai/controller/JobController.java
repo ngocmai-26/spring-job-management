@@ -7,7 +7,6 @@ import com.job_manager.mai.request.job.*;
 import com.job_manager.mai.service.job.JobService;
 import com.job_manager.mai.util.ApiResponseHelper;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/jobs")
 @CrossOrigin
-@Slf4j
 public class JobController implements ICrudController<JobRequest, CreateJobRequest, UpdateJobRequest, DeleteJobRequest, String> {
     private final BaseController baseController;
 
@@ -143,6 +141,15 @@ public class JobController implements ICrudController<JobRequest, CreateJobReque
         try {
 //            baseController.processPermission(Permission.MANAGE_JOB_UPDATE);
             return jobService.giveJob(id, request);
+        } catch (Exception e) {
+            return ApiResponseHelper.fallback(e);
+        }
+    }
+
+    @PutMapping("/evaluate-job/{id}")
+    public ResponseEntity<?> evaluateJobForUser(@PathVariable(name = "id") String jobId, @RequestBody EvaluateUserJobRequest request) {
+        try {
+            return jobService.evaluateJobForUser(jobId, request);
         } catch (Exception e) {
             return ApiResponseHelper.fallback(e);
         }

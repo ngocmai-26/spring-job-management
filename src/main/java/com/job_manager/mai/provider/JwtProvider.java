@@ -39,7 +39,7 @@ public class JwtProvider {
         return generateToken(new HashMap<>(), userDetails);
     }
 
-    public <T> T extractClaims(String token, Function<Claims, T> claimResolver) {
+    public <T> T extractClaims(String token, Function<Claims, T> claimResolver  ) {
         final Claims claims = extractAll(token);
         return claimResolver.apply(claims);
     }

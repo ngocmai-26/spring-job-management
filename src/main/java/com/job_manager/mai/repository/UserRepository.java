@@ -17,6 +17,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     @Query(value = "select u from User u where u.email = :key or u.phone = :key")
     Optional<User> findByEmailOrPhone(String key);
-
+    
     Page<User> findAllUserByEmailContaining(Pageable pageable, String email);
+
 }
