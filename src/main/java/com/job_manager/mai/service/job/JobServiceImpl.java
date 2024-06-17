@@ -154,26 +154,38 @@ public class JobServiceImpl extends BaseService implements JobService {
     @Override
     public ResponseEntity<?> updateUserJob(String jobId, UpdateUserJobDetailRequest request) throws Exception {
         Job job = jobRepository.findById(jobId).orElseThrow(() -> new UsernameNotFoundException("Job not found by id : " + jobId));
+
+        // Duyệt qua từng userJob trong danh sách job.getUserJobs()
         for (UserJob userJob : job.getUserJobs()) {
             if (userJob.getUser().getId().equals(request.getUserId())) {
                 int oldProgress = userJob.getProgress();
                 BeanUtils.copyProperties(request, userJob);
                 userJob.setProgress(oldProgress);
                 userJob.setCachedProgress(request.getProgress());
+
                 if (request.getStatus() == JobStatus.DONE) {
-                    // push notification
+                    // Thực hiện các hành động khi request.getStatus() là DONE
                     userJob.setStatus(JobStatus.DONE);
                     userJob.getUser().setJobPoint(userJob.getUser().getJobPoint() + job.getPointPerJob());
-                    // luu lich su cong diem
+
+                    // Lưu lịch sử cộng điểm
                     KpiHistory kpiHistory = new KpiHistory();
                     kpiHistory.setUser(userJob.getUser());
-                    kpiHistoryService.createNewFromOtherService("Cộng " + job.getPointPerJob() + " điểm từ job : " + job.getTitle(), userJob.getUser());
+                    kpiHistoryService.createNewFromOtherService("Cộng " + job.getPointPerJob() + " điểm từ job : " + job.getId(), userJob.getUser());
+
+                    // Gửi thông báo đến nhân viên
                     pushNotificationForAStaff(jobId, userJob.getUser(), job.getManager(), "Bạn vừa hoàn thành một công việc");
                 }
+
+                // Lưu userJob vào cơ sở dữ liệu
                 userJobRepository.save(userJob);
             }
-            jobRepository.save(job);
         }
+
+        // Sau khi duyệt hết danh sách userJobs, lưu lại job vào cơ sở dữ liệu
+        jobRepository.save(job);
+
+        // Trả về thành công
         return ApiResponseHelper.success();
     }
 
@@ -218,7 +230,8 @@ public class JobServiceImpl extends BaseService implements JobService {
     }
 
     @Override
-    public ResponseEntity<?> giveJob(String id, GiveJobForUserRequest request) throws Exception {
+    public ResponseEntity<?> giveJob(String id,
+                                     GiveJobForUserRequest request) throws Exception {
         Job job = jobRepository.findById(id).orElseThrow(() -> new Exception("Job not found"));
         if (!SecurityHelper.getLoggedUser().equals(job.getManager().getEmail())) {
             return ApiResponseHelper.fallback(new Exception(""));
